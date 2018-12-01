@@ -1,0 +1,15 @@
+h1 {
+  font: bold 2em serif;
+}
+
+h2 {
+  font: normal 1.5em serif;
+}
+
+header {
+  padding: 1em;
+}
+
+main {
+  padding: 1em;
+}

@@ -13,3 +13,21 @@ header {
 main {
   padding: 1em;
 }
+
+table {
+  border-collapse: separate;
+  border: .1em solid #6f6f6f;
+}
+
+td {
+  padding: .5em;
+}
+
+th {
+  font-weight: bold;
+  padding: .5em;
+}
+
+tr:nth-child(even) {
+  background-color: #efefef;
+}

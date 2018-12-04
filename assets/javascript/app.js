@@ -9,10 +9,11 @@ class Question {
 }
 
 
-let intervalId = null;
+let timeoutId = null;
 let results;
 let slideNumber;
-const secondsPerQuestion = 1;
+const secondsPerAnswer = 1;
+const secondsPerQuestion = 3;
 const questions = [
   new Question("What is the first question?", ["Nothing", "Something Else", "Fancy"], 2),
   new Question("What is the second question?", ["If", "I", "Had", "No", "Limbs"], 3),
@@ -21,68 +22,63 @@ const questions = [
 
 function chooseOption(questionIndex, answer) {
   results[questionIndex] = answer;
-  clearInterval(intervalId);
-  resetInterval();
-}
-
-function createResultsTable() {
-  let table = $("<table>");
-
-  let headerRow = $("<tr>");
-  headerRow.append("<th>Number</th>");
-  headerRow.append("<th>Choice</th>");
-  headerRow.append("<th>Answer</th>");
-  table.append(headerRow);
-  
-  for (let i = 0; i < questions.length; i++) {
-    const question = questions[i];
-
-    const questionNumber = i + 1;
-
-    const choiceIndex = results[i];
-    let choice = "Unanswered";
-    if (choiceIndex !== undefined) {
-      choice = question.options[choiceIndex];
-    }
-
-    const answer = question.options[question.answer];
-
-    let row = $("<tr>");
-    row.append("<td>" + questionNumber +"</td>");
-    row.append("<td>" + choice +"</td>");
-    row.append("<td>" + answer +"</td>");
-    table.append(row);
-  }
-
-  return table;
+  clearTimeout(timeoutId);
+  nextSlide();
 }
 
 function endQuiz() {
-  clearInterval(intervalId);
+  clearTimeout(timeoutId);
 
   $("#game-panel").empty();
   $("#game-panel").append("<h2>Quiz Finished!</h2>");
 
-  const table = createResultsTable();
-  $("#game-panel").append(table);
+  gradeQuiz();
 
   let retryButton = $("<button type=\"button\">Retry</button>");
+  retryButton.addClass("play");
   retryButton.one("click", startQuiz);
   $("#game-panel").append(retryButton);
 }
 
+function gradeQuiz() {
+  let questionsCorrect = 0;
+  let questionsUnanswered = 0;
+
+  for (let i = 0; i < questions.length; i++) {
+    let choice = results[i];
+    let answer = questions[i].answer;
+    if (choice === answer) {
+      questionsCorrect++;
+    } else if (choice === undefined) {
+      questionsUnanswered++;
+    }
+  }
+
+  $("#game-panel").append("<p>Correct: " + questionsCorrect + "/" + questions.length + "</p>");
+  $("#game-panel").append("<p>Unanswered: " + questionsUnanswered + "</p>");
+}
+
 function nextSlide() {
-  if (slideNumber < questions.length) {
-    showQuestion(slideNumber);
+  let questionNumber = Math.floor(slideNumber / 2);
+  if (questionNumber < questions.length) {
+    if (slideNumber % 2 === 1) {
+      showAnswer(questionNumber);
+      timeoutId = setTimeout(nextSlide, 1000 * secondsPerAnswer);
+    } else {
+      showQuestion(questionNumber);
+      timeoutId = setTimeout(nextSlide, 1000 * secondsPerQuestion);
+    }
   } else {
     endQuiz();
   }
   slideNumber++;
 }
 
-function resetInterval() {
-  intervalId = setInterval(nextSlide, 5000 * secondsPerQuestion);
-  nextSlide();
+function showAnswer(questionIndex) {
+  const question = questions[questionIndex];
+  const answer = question.options[question.answer];
+  $("#game-panel").html("<h2>Answer</h2>");
+  $("#game-panel").append("<p>" + answer + "</p>")
 }
 
 function showQuestion(questionIndex) {
@@ -98,6 +94,7 @@ function showQuestion(questionIndex) {
     const option = next.options[i];
     let button = $("<button type=\"button\">");
     button.attr("value", i);
+    button.addClass("choice");
     button.text(option);
     button.one("click", (event) => {
       const value = $(event.currentTarget).val();
@@ -113,7 +110,7 @@ function showQuestion(questionIndex) {
 function startQuiz() {
   results = [];
   slideNumber = 0;
-  resetInterval();
+  nextSlide();
 }
 
 $(document).ready(() => {

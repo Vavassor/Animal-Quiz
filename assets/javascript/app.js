@@ -10,8 +10,11 @@ class Question {
 
 
 let timeoutId = null;
-let results;
+let progressIntervalId = null;
+let choices;
 let slideNumber;
+let progressValue;
+const animationSteps = 100;
 const secondsPerAnswer = 1;
 const secondsPerQuestion = 3;
 const questions = [
@@ -20,14 +23,21 @@ const questions = [
 ];
 
 
+function animateProgress() {
+  progressValue -= 1;
+  $("#question-timer").attr("value", progressValue);
+}
+
 function chooseOption(questionIndex, answer) {
-  results[questionIndex] = answer;
+  choices[questionIndex] = answer;
   clearTimeout(timeoutId);
   nextSlide();
 }
 
 function endQuiz() {
   clearTimeout(timeoutId);
+  clearInterval(progressIntervalId);
+  $("#question-timer").hide();
 
   $("#game-panel").empty();
   $("#game-panel").append("<h2>Quiz Finished!</h2>");
@@ -45,7 +55,7 @@ function gradeQuiz() {
   let questionsUnanswered = 0;
 
   for (let i = 0; i < questions.length; i++) {
-    let choice = results[i];
+    let choice = choices[i];
     let answer = questions[i].answer;
     if (choice === answer) {
       questionsCorrect++;
@@ -75,6 +85,9 @@ function nextSlide() {
 }
 
 function showAnswer(questionIndex) {
+  clearInterval(progressIntervalId);
+  $("#question-timer").hide();
+
   const question = questions[questionIndex];
   const answer = question.options[question.answer];
   $("#game-panel").html("<h2>Answer</h2>");
@@ -105,14 +118,26 @@ function showQuestion(questionIndex) {
   }
 
   $("#game-panel").append(form);
+
+  restartProgressBar();
+}
+
+function restartProgressBar() {
+  $("#question-timer").show();
+  progressValue = 100;
+  $("#question-timer").attr("value", progressValue);
+
+  const millseconds = Math.floor(1000 * secondsPerQuestion / animationSteps);
+  progressIntervalId = setInterval(animateProgress, millseconds);
 }
 
 function startQuiz() {
-  results = [];
+  choices = [];
   slideNumber = 0;
   nextSlide();
 }
 
 $(document).ready(() => {
+  $("#question-timer").hide();
   $("#start-button").one("click", startQuiz);
 });

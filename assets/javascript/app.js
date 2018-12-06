@@ -15,11 +15,59 @@ let choices;
 let slideNumber;
 let progressValue;
 const animationSteps = 100;
-const secondsPerAnswer = 1;
-const secondsPerQuestion = 3;
+const secondsPerAnswer = 2;
+const secondsPerQuestion = 20;
 const questions = [
-  new Question("What is the first question?", ["Nothing", "Something Else", "Fancy"], 2),
-  new Question("What is the second question?", ["If", "I", "Had", "No", "Limbs"], 3),
+  new Question(
+    "What is the only bird known to fly backward?",
+    ["Merlin", "Hummingbird", "Peregrine Falcon", "Red-Tailed Hawk", "Bat"],
+    1
+  ),
+  new Question(
+    "What is the most common US state bird?",
+    ["Goldfinch", "Western Meadowlark", "Bluebird", "Robin", "Cardinal"],
+    4
+  ),
+  new Question(
+    "What is the largest carnivore in Britain?",
+    ["Pinemarten", "Red Fox", "Badger", "Black Bear", "Weasel"],
+    2
+  ),
+  new Question(
+    "Which bat doesn't echolocate?",
+    ["Fruit Bat", "Brown Bat", "Vampire Bat", "Hog-Nosed Bat"],
+    0
+  ),
+  new Question(
+    "Which common pet can't taste hot pepper?",
+    ["Dog", "Cat", "Rabbit", "Cockatiel", "Guinea Pig"],
+    3
+  ),
+  new Question(
+    "Which bird is the most common in the world?",
+    ["Pigeon", "Chicken", "Robin", "Red-billed Quelea", "Duck"],
+    1
+  ),
+  new Question(
+    "What animal does cashmere come from?",
+    ["Goat", "Sheep", "Beaver", "Raccoon"],
+    0
+  ),
+  new Question(
+    "A reindeer is another name for what kind of deer?",
+    ["Moose", "Caribou", "Elk", "Mule Deer"],
+    0
+  ),
+  new Question(
+    "Which of these animals can run the fastest?",
+    ["Horse", "Ostrich", "Hare", "Lion"],
+    1
+  ),
+  new Question(
+    "Which of these animals can't hear?",
+    ["Frog", "Carp", "Bee"],
+    2
+  )
 ];
 
 
@@ -137,7 +185,7 @@ function startQuiz() {
   nextSlide();
 }
 
+
 $(document).ready(() => {
-  $("#question-timer").hide();
   $("#start-button").one("click", startQuiz);
 });

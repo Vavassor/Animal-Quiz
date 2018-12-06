@@ -114,6 +114,10 @@ function gradeQuiz() {
 
   $("#game-panel").append("<p>Correct: " + questionsCorrect + "/" + questions.length + "</p>");
   $("#game-panel").append("<p>Unanswered: " + questionsUnanswered + "</p>");
+
+  if (questionsCorrect === questions.length) {
+    $("#game-panel").append("<div><p class=\"congratulations\">Congrats! You aced the quiz!🙌🎉</p></div>");
+  }
 }
 
 function nextSlide() {

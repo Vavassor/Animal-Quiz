@@ -28,7 +28,7 @@ em {
 
 footer {
   grid-area: footer;
-  margin: 0 1em;
+  margin: 0 1em 1em 1em;
 }
 
 form {
@@ -76,7 +76,7 @@ progress {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: #dfdfdf;
+  background-color: #ffef8f;
   display: none;
   width: 100%;
 }
@@ -86,11 +86,20 @@ progress::-moz-progress-bar {
 }
 
 progress::-webkit-progress-bar {
-  background-color: #dfdfdf;
+  background-color: #ffef8f;
 }
 
 progress::-webkit-progress-value {
   background-color: #6B2E23;
+}
+
+.congratulations {
+  background: #00aabb;
+  border-radius: 1em;
+  color: #ffffff;
+  display: inline-block;
+  margin-top: 1em;
+  padding: 1em;
 }
 
 .correct-answer {

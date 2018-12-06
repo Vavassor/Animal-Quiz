@@ -20,7 +20,7 @@ const secondsPerQuestion = 20;
 const questions = [
   new Question(
     "What is the only bird known to fly backward?",
-    ["Merlin", "Hummingbird", "Peregrine Falcon", "Red-Tailed Hawk", "Bat"],
+    ["Merlin", "Hummingbird", "Peregrine Falcon", "Bat"],
     1
   ),
   new Question(
@@ -72,7 +72,7 @@ const questions = [
 
 
 function animateProgress() {
-  progressValue -= 1;
+  progressValue--;
   $("#question-timer").attr("value", progressValue);
 }
 
@@ -137,9 +137,19 @@ function showAnswer(questionIndex) {
   $("#question-timer").hide();
 
   const question = questions[questionIndex];
-  const answer = question.options[question.answer];
-  $("#game-panel").html("<h2>Answer</h2>");
-  $("#game-panel").append("<p>" + answer + "</p>")
+  const choice = choices[questionIndex];
+
+  if (choice === question.answer) {
+    $("#game-panel").html("<h2>Correct!</h2>");
+  } else {
+    if (choice === undefined) {
+      $("#game-panel").html("<h2>Time's up!</h2>");
+    } else {
+      $("#game-panel").html("<h2>Incorrect!</h2>");
+    }
+    const answer = question.options[question.answer];
+    $("#game-panel").append("<p>The answer is " + answer + ".</p>");
+  }
 }
 
 function showQuestion(questionIndex) {

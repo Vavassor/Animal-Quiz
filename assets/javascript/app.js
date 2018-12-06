@@ -56,7 +56,7 @@ const questions = [
   new Question(
     "A reindeer is another name for what kind of deer?",
     ["Moose", "Caribou", "Elk", "Mule Deer"],
-    0
+    1
   ),
   new Question(
     "Which of these animals can run the fastest?",

@@ -1,4 +1,5 @@
 body {
+  background: url("../images/animals-pattern.png") repeat;
   display: grid;
   grid-template-areas:
     "header"
@@ -8,7 +9,8 @@ body {
 }
 
 footer {
-  grid-area: footer; 
+  grid-area: footer;
+  margin: 0 1em;
 }
 
 form {
@@ -18,12 +20,20 @@ form {
 }
 
 h1 {
-  font: bold 2em serif;
+  font: bold 3em "Ribeye Marrow", serif;
 }
 
 h2 {
   font: bold 1.5em serif;
   margin: .83em 0;
+}
+
+h2:first-child {
+  margin-top: 0;
+}
+
+h2:last-child {
+  margin-bottom: 0;
 }
 
 header {
@@ -32,23 +42,51 @@ header {
 }
 
 main {
+  background-color: #ffffff;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
   grid-area: main;
-  padding: 1em;
+  margin: 0 1em;
+  padding: 2em;
 }
 
 progress {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #dfdfdf;
   display: none;
+  width: 100%;
+}
+
+progress::-moz-progress-bar {
+  background-color: #DE752A;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #dfdfdf;
+}
+
+progress::-webkit-progress-value {
+  background-color: #6B2E23;
 }
 
 .choice {
-  background: none;
-  border: .1em solid #000000;
+  background: #6B2E23;
+  border: none;
+  border-radius: 1em;
+  color: #ffffff;
+  font-size: 1em;
   margin-top: .5em;
   padding: 1em;
 }
 
 .choice:first-child {
   margin-top: 0;
+}
+
+.choice:hover {
+  background-color: #DE752A;
 }
 
 .play {
@@ -65,6 +103,14 @@ progress {
       ". main ."
       ". footer .";
     grid-template-columns: 1fr 540px 1fr;
+  }
+
+  footer {
+    margin: 0;
+  }
+
+  main {
+    margin: 0;
   }
 }
 

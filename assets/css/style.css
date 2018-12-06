@@ -8,6 +8,24 @@ body {
   grid-template-columns: 1fr;
 }
 
+button {
+  background: #6B2E23;
+  border: none;
+  border-radius: 1em;
+  color: #ffffff;
+  font-size: 1em;
+  margin-top: .5em;
+  padding: 1em;
+}
+
+button:hover {
+  background-color: #DE752A;
+}
+
+em {
+  font-style: italic;
+}
+
 footer {
   grid-area: footer;
   margin: 0 1em;
@@ -24,7 +42,7 @@ h1 {
 }
 
 h2 {
-  font: bold 1.5em serif;
+  font: bold 1.5em "Fresca", sans-serif;
   margin: .83em 0;
 }
 
@@ -50,6 +68,10 @@ main {
   padding: 2em;
 }
 
+p {
+  font: normal 1.25em sans-serif;
+}
+
 progress {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -71,29 +93,12 @@ progress::-webkit-progress-value {
   background-color: #6B2E23;
 }
 
-.choice {
-  background: #6B2E23;
-  border: none;
-  border-radius: 1em;
-  color: #ffffff;
-  font-size: 1em;
-  margin-top: .5em;
-  padding: 1em;
+.correct-answer {
+  font-weight: bold;
 }
 
-.choice:first-child {
-  margin-top: 0;
-}
-
-.choice:hover {
-  background-color: #DE752A;
-}
-
-.play {
-  background: none;
-  border: .1em solid #000000;
-  margin-top: 1em;
-  padding: 1em;
+.retry {
+  margin-top: 2em;
 }
 
 @media screen and (min-width: 576px) {

@@ -93,7 +93,7 @@ function endQuiz() {
   gradeQuiz();
 
   let retryButton = $("<button type=\"button\">Retry</button>");
-  retryButton.addClass("play");
+  retryButton.addClass("retry");
   retryButton.one("click", startQuiz);
   $("#game-panel").append(retryButton);
 }
@@ -148,7 +148,7 @@ function showAnswer(questionIndex) {
       $("#game-panel").html("<h2>Incorrect!</h2>");
     }
     const answer = question.options[question.answer];
-    $("#game-panel").append("<p>The answer is " + answer + ".</p>");
+    $("#game-panel").append("<p>The answer is <span class=\"correct-answer\">" + answer + "</span>.</p>");
   }
 }
 
